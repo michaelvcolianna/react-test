@@ -1,16 +1,45 @@
-function TestComponent({ key, data, children }) {
-  return <div>
+function TestComponent({ key, id, data }) {
+  return <div style={{ marginBottom: '1rem' }}>
+    ID# {id}
     <pre>{JSON.stringify({ key, data }, null, 2)}</pre>
-    {children}
   </div>
 }
 
 export default function Home() {
+  const fakeData = [
+    {
+      id: 1,
+      key: 'key-1',
+      data: {
+        a: 'a',
+        b: 'b'
+      }
+    },
+    {
+      id: 2,
+      key: 'key-2',
+      data: {
+        a: 'b',
+        b: 'c'
+      }
+    },
+    {
+      id: 3,
+      key: 'key-3',
+      data: {
+        a: 'c',
+        b: 'd'
+      }
+    },
+  ]
+
   return (
     <div>
-      <TestComponent {...{ key: 'key', data: 'data' }}>
-        So this is passing "key" but since that's a reserved word, we can't use it.
-      </TestComponent>
+      {fakeData.map((props) => {
+        const { key, ...passProps } = props
+
+        return <TestComponent key={key} {...passProps} />
+      })}
     </div>
   );
 }
