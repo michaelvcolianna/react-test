@@ -8,7 +8,9 @@ function TestComponent({ key, data, children }) {
 export default function Home() {
   return (
     <div>
-      <TestComponent key="test" {...{ data: 'data' }}>Above should be the "key" and "data" props.</TestComponent>
+      <TestComponent {...{ key: 'key', data: 'data' }}>
+        So this is passing "key" but since that's a reserved word, we can't use it.
+      </TestComponent>
     </div>
   );
 }
